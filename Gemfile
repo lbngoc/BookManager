@@ -8,8 +8,7 @@ gem 'therubyracer'
 
 gem 'mysql2'
 
-# thin server
-# gem 'thin'
+gem 'bootstrap-sass', '3.2.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,7 +24,9 @@ end
 
 gem 'jquery-rails'
 
-gem 'devise'
+gem 'devise', '~> 3.1'
+gem 'devise-bootstrap-views'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
