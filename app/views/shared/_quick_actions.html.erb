@@ -1,0 +1,9 @@
+<div class="btn-group" role="group" aria-label="action-controls">
+	<%= link_to raw('<i class="glyphicon glyphicon-chevron-left"></i> Back'), 
+			back_link, class: "btn btn-default" %>
+	<%= link_to raw('<i class="glyphicon glyphicon-pencil"></i> Edit'),
+			edit_link, class: "btn btn-default" %>
+	<%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), 
+			'#', class: "btn btn-default",
+			method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>

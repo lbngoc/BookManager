@@ -38,4 +38,13 @@ BookManager::Application.configure do
   # devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
+  # paperclip
+  config.paperclip_defaults = {
+    :storage => :fog,
+    :fog_credentials => {:provider => "Local", :local_root => "#{Rails.root}/public"},
+    :fog_directory => "",
+    :fog_public => true,
+    :fog_host => "http://localhost:3000"
+  }
+
 end

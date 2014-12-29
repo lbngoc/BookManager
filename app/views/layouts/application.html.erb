@@ -3,8 +3,8 @@
 
 <head>
 	<title><%= full_title(yield(:title)) %></title>
-	<%= stylesheet_link_tag 'application', media: 'all',                                      'data-turbolinks-track' => true %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag 'application', media: 'all' %>
+	<%= javascript_include_tag 'application' %>
 	<%= csrf_meta_tags %>
 	<!--[if lt IE 9]>
 	  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
@@ -16,12 +16,7 @@
 
 <%= render 'layouts/header' %>
 <div class="container">
-	<% if notice %>
-		<div class="alert alert-success"><%= notice %></div>
-	<% end %>
-	<% if alert %>
-		<div class="alert alert-danger"><%= alert %></div>
-	<% end %>
+	<%= render 'shared/flash_messages' %>
 		
 	<% if devise_controller?(params[:controller]) %>
 		<div class="row">
@@ -36,7 +31,40 @@
 			</div>
 		</div>
 	<% else %>
+		<% if is_admin? %>
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="bs-callout bs-callout-danger">
+					<h4><i class="glyphicon glyphicon-book"></i> Book</h4>
+					<p><%= link_to("New Book", new_book_path) %> | 
+						<%= link_to("Manage Books", books_path) %></p>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="bs-callout bs-callout-warning">
+					<h4><i class="glyphicon glyphicon-user"></i> Author</h4>
+					<p><%= link_to("New Author", new_author_path) %> |
+					 <%= link_to("Manage Authors", authors_path) %></p>
+				</div>				
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="bs-callout bs-callout-info">
+					<h4><i class="glyphicon glyphicon-tags"></i> Category</h4>
+					<p><%= link_to("New Category", new_category_path) %> | 
+						<%= link_to("Manage Categories", categories_path) %></p>
+				</div>				
+			</div>
+		</div>	
 		<%= yield %>
+		<% else %>
+			<div class="jumbotron">
+			  <h1>Welcome !</h1>
+			  <p>
+			  	Hi, it's just a demo page.<br/>
+			  	Please logged as administrator to use this web app.
+			  </p>
+			</div>
+		<% end %>		
 	<% end %>
 
 	<%= render 'layouts/footer' %>    

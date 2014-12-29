@@ -1,11 +1,24 @@
 BookManager::Application.routes.draw do
+  
   devise_for :users
   devise_scope :user do
-    root to: "devise/sessions#new"
+    authenticated do
+      root to: 'books#index'
+    end
+
+    unauthenticated do
+      root to: 'devise/sessions#new', as: 'unauthenticated_root'
+    end
   end
 
   get "static_pages/home"
-  get "static_pages/help"  
+  get "static_pages/help" , as: 'help' 
+
+  resources :authors
+  resources :categories
+
+  post 'books/delete', as: 'delete_books'  
+  resources :books
 
   # root :to => 'static_pages#home'
 

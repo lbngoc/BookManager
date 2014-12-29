@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h1>Books</h1>
+</div>
+
+<%
+data_url = if params[:category_id].present?
+            books_url(format: "json", category_id: params[:category_id])
+          elsif params[:author_id].present?
+            books_url(format: "json", author_id: params[:author_id])
+          else
+            books_url(format: "json")
+          end
+%>
+<form method="post" id="book-form" action="<%= delete_books_path %>">
+<table id="books" class="table table-bordered datatable" data-source="<%= data_url %>">
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Cover</th>
+      <th>Year</th>
+      <th>Category</th>
+      <th>Select</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<div class="pull-left">  
+  <%= link_to raw("<i class='glyphicon glyphicon-trash'></i> Delete Selected"),
+                "#",
+                :id => "btn-delete-books",
+                :class => "btn btn-danger" %>
+</div>
+</form>
+
+<script type="text/javascript">
+$('#btn-delete-books').click(function(e){
+  e.preventDefault();
+  var selected = $('#books').find("input[name='books[]']:checked").length;
+  if (selected == 0) {
+    alert("Please select at least one item !");
+  } else if (confirm("Are you sure you want to remove " + selected + " item(s) ?")) {
+    $('#book-form').submit();
+  }  
+});
+</script>

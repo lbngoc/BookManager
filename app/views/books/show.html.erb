@@ -1,0 +1,37 @@
+<% provide(:title, @book.title) %>
+<div class="page-header">
+  <h1>Book Details</h1>
+</div>
+
+<table class="table table-bordered">
+  <tr>
+    <th>ID</th>
+    <td><%= @book.id %></td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td><%= @book.title %></td>
+  </tr>
+  <tr>
+    <th>Author</th>
+    <td><%= @book.author.name %></td>
+  </tr>
+  <tr>
+    <th>Year</th>
+    <td><%= @book.year %></td>
+  </tr>
+  <tr>
+    <th>Category</th>
+    <td><%= @book.category.name %></td>
+  </tr>
+  <% if @book.cover %>
+    <tr>
+      <th>Cover</th>
+      <td><%= image_tag @book.cover.url(:medium) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= render 'shared/quick_actions', 
+  back_link: books_path,
+  edit_link: edit_book_path(@book) %>
