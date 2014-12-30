@@ -4,9 +4,17 @@ class AuthorsController < ApplicationController
   respond_to :html
 
   def index
+    @authors = if params[:term]
+      Author.find(:all, :conditions => ['name LIKE ?', "#{params[:term]}%"])
+#      Author.where(:name => params[:term])
+    else
+      Author.all
+    end
+    
     respond_to do |format|
       format.html
-      format.json { render json: AuthorsDatatable.new(view_context) }
+      format.datatable { render json: AuthorsDatatable.new(view_context) }
+      format.json { render json: @authors.to_json(:only => [:id, :name]) }
     end
   end
 
@@ -45,7 +53,7 @@ class AuthorsController < ApplicationController
   end
 
   private
-    def set_author
-      @author = Author.find(params[:id])
-    end
+  def set_author
+    @author = Author.find(params[:id])
+  end
 end

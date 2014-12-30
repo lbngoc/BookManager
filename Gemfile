@@ -30,6 +30,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'devise', '~> 3.1'
 gem 'devise-bootstrap-views'
@@ -42,6 +43,10 @@ gem 'strong_parameters'
 
 gem "paperclip", "~> 4.2"
 gem 'fog'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

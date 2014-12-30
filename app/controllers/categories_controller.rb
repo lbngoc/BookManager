@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: CategoriesDatatable.new(view_context) }
+      format.datatable { render json: CategoriesDatatable.new(view_context) }
     end
   end
 
